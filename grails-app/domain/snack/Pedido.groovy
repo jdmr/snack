@@ -10,4 +10,8 @@ class Pedido {
         nombre maxSize:128, blank:false
         estatus maxSize:32, inList:['PENDIENTE','ENTREGADO']
     }
+    
+    String toString() {
+        "Pedido: $nombre | $estatus"
+    }
 }

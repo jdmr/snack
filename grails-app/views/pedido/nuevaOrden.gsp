@@ -1,0 +1,65 @@
+<%@ page import="snack.Orden" %>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="layout" content="main" />
+        <g:set var="entityName" value="${message(code: 'orden.label', default: 'Orden')}" />
+        <title><g:message code="default.create.label" args="[entityName]" /></title>
+    </head>
+    <body>
+        <div class="nav">
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
+        </div>
+        <div class="body">
+            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+            </g:if>
+            <g:hasErrors bean="${ordenInstance}">
+            <div class="errors">
+                <g:renderErrors bean="${ordenInstance}" as="list" />
+            </div>
+            </g:hasErrors>
+            <g:form action="guardaOrden" >
+                <div class="dialog">
+                    <table>
+                        <tbody>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="cantidad"><g:message code="orden.cantidad.label" default="Cantidad" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: ordenInstance, field: 'cantidad', 'errors')}">
+                                    <g:textField name="cantidad" value="${fieldValue(bean: ordenInstance, field: 'cantidad')}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="pedido"><g:message code="orden.pedido.label" default="Pedido" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: ordenInstance, field: 'pedido', 'errors')}">
+                                    <g:select name="pedido.id" from="${snack.Pedido.list()}" optionKey="id" value="${ordenInstance?.pedido?.id}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="producto"><g:message code="orden.producto.label" default="Producto" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: ordenInstance, field: 'producto', 'errors')}">
+                                    <g:select name="producto.id" from="${snack.Producto.list()}" optionKey="id" value="${ordenInstance?.producto?.id}"  />
+                                </td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <div class="buttons">
+                    <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
+                </div>
+            </g:form>
+        </div>
+    </body>
+</html>
